@@ -1,0 +1,5 @@
+{
+    "name": "Template Plugin",
+    "description": "A template for creating NickelMenu plugins",
+    "version": "v0.0.1"
+}
