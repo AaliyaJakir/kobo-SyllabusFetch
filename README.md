@@ -1,25 +1,31 @@
-This Kobo plugin takes Exported Notebooks and generates recommendations for MIT OpenCourses and gets their syllabus content. I use CALIBRE-WEB-AUTOMATED to deliver the syllabus to my Kobo. You can select from a list of exported notebooks, then you get 5 courses to choose from, and then you get a syllabus on your Kobo. 
+# Kobo-SyllabusFetch
 
-TO RUN THIS PLUGIN:
-1. Put these scripts on your Kobo at /mnt/onboard/
-ocw_search.sh
-- Takes your search query and searches for courses using vector embedding similarity search
-ocw_fetch.sh
-- Takes a url and fetches the syllabus content and sends it to Kobo as an epub
+This Kobo plugin takes exported notebooks and generates recommendations for MIT OpenCourses, fetching their syllabus content. Using **CALIBRE-WEB-AUTOMATED**, the syllabus is delivered directly to your Kobo. 
 
-2. Run search_service.py and put {EPUB_DIR} where your cwa book ingest folder is
+## How It Works
+1. Select an exported notebook on your Kobo.
+2. Get 5 recommended MIT OpenCourses.
+3. Fetch the syllabus and receive it as an EPUB on your Kobo.
 
-3. Put the KoboRoot.tgz into your .kobo folder and then your Kobo will update (use a cable, ftp w/ nickelmenu, or ssh)
+---
 
-#####
+## Installation
 
-DEVELOPMENT
+1. **Add Scripts to Kobo**  
+   Place these scripts in `/mnt/onboard/`:
+   - `ocw_search.sh`: Searches courses using vector embedding similarity.
+   - `ocw_fetch.sh`: Fetches syllabus content and sends it to Kobo as an EPUB.
 
-If you want to make changes and remake the plugin, run this:
+2. **Run the Search Service**  
+   Execute `search_service.py` on your server and configure `{EPUB_DIR}` to point to your `calibre-web-automated` book ingestion folder.
+
+3. **Update Kobo**  
+   Place `KoboRoot.tgz` in your Kobo’s `.kobo` folder. This will update your Kobo.
+
+---
+
+## Development
+
+To make changes and rebuild the plugin:
 ```bash
 docker run -u $(id -u):$(id -g) --volume="$PWD:$PWD" --entrypoint=make --workdir="$PWD" --env=HOME --rm -it ghcr.io/pgaskin/nickeltc:1 NAME=SyllabusFetch
-```
-
-Then use an ftp server to take the KoboRoot.tgz into your .kobo folder
-
-*Note: I host a server on my raspberry pi using search_service.py where I also host my calibre-web-automated
