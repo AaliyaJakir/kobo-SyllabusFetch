@@ -1,0 +1,3 @@
+# lecture-notes
+
+Outlines from selected lecture sessions are provided below. Lecture 1: What is Memory? (PDF) Lecture 3: Neuroimaging and Cognitive Control (PDF) Lecture 5: Episodic and PrimarycMemory (PDF) Lecture 9: Nondeclarative Memory (PDF)

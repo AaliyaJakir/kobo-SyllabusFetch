@@ -1,0 +1,7 @@
+Available course content:
+========================
+- assignments
+- calendar
+- readings
+- related-resources
+- syllabus

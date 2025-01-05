@@ -1,0 +1,18 @@
+Available course content:
+========================
+- syllabus
+- calendar
+- readings
+- lecture-slides
+- assignments
+- essay-1
+- essay-2
+- final-paper
+- syllabus
+- calendar
+- readings
+- lecture-slides
+- assignments
+- essay-1
+- essay-2
+- final-paper

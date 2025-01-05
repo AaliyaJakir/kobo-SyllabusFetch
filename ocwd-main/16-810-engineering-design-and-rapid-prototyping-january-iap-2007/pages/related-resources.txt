@@ -1,0 +1,3 @@
+# related-resources
+
+Manual for Design Tools Used in this Course SolidWorks®, CosmosWorks®, OMAX® and Water Jet Manual (PDF - 1.5 MB) Course Pedagogy Reference The article referenced below summarizes this course in a compact form. It is a useful reference for instructors who are interested in teaching a similar course. Kim, I. L., O. L. de Weck, W. Nadir, P. Young, and D. Wallace. &ldquo;Innovative Modern Engineering Design and Rapid Prototyping Course: A Rewarding CAD/CAE/CAM Experience for Undergraduates.&rdquo; American Society of Engineering Education (ASEE) 2004 Annual Conference & Exposition. Salt Lake City, Utah, June 20-23, 2004.
