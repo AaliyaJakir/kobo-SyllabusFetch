@@ -1,19 +1,19 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QApplication>
-#include "syllabusTest2.h"
+#include "SyllabusFetch.h"
 
-syllabusTest2::syllabusTest2() : m_listWidget(nullptr), m_process(nullptr)
+SyllabusFetch::SyllabusFetch() : m_listWidget(nullptr), m_process(nullptr)
 {
     // Constructor
 }
 
-syllabusTest2::~syllabusTest2()
+SyllabusFetch::~SyllabusFetch()
 {
     cleanupProcess();
 }
 
-void syllabusTest2::showUi()
+void SyllabusFetch::showUi()
 {
     // Clear any previous state
     m_courses.clear();
@@ -38,7 +38,7 @@ void syllabusTest2::showUi()
     showNotebookSelection();
 }
 
-void syllabusTest2::showNotebookSelection()
+void SyllabusFetch::showNotebookSelection()
 {
     clearLayout();
     
@@ -166,7 +166,7 @@ void syllabusTest2::showNotebookSelection()
         "}"
     );
     selectButton->installEventFilter(this);
-    connect(selectButton, &QPushButton::clicked, this, &syllabusTest2::onNotebookSelected);
+    connect(selectButton, &QPushButton::clicked, this, &SyllabusFetch::onNotebookSelected);
     buttonLayout->addWidget(selectButton);
 
     // Add exit button second (on bottom) with red styling
@@ -188,7 +188,7 @@ void syllabusTest2::showNotebookSelection()
     m_dlg.showDlg();
 }
 
-void syllabusTest2::onNotebookSelected()
+void SyllabusFetch::onNotebookSelected()
 {
     QListWidgetItem* item = m_listWidget->currentItem();
     if (!item) {
@@ -223,14 +223,14 @@ void syllabusTest2::onNotebookSelected()
     cleanupProcess();
     m_process = new QProcess(this);
     connect(m_process, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-            this, &syllabusTest2::onSearchFinished);
+            this, &SyllabusFetch::onSearchFinished);
 
     QStringList arguments;
     arguments << m_selectedNotebook;
     m_process->start(SEARCH_SCRIPT, arguments);
 }
 
-void syllabusTest2::onSearchFinished(int exitCode, QProcess::ExitStatus exitStatus)
+void SyllabusFetch::onSearchFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
     if (exitCode == 0 && exitStatus == QProcess::NormalExit) {
         QString response = m_process->readAllStandardOutput();
@@ -243,7 +243,7 @@ void syllabusTest2::onSearchFinished(int exitCode, QProcess::ExitStatus exitStat
     cleanupProcess();
 }
 
-void syllabusTest2::showCourseSelection(const QString &response)
+void SyllabusFetch::showCourseSelection(const QString &response)
 {
     // Parse JSON response
     QJsonDocument doc = QJsonDocument::fromJson(response.toUtf8());
@@ -353,7 +353,7 @@ void syllabusTest2::showCourseSelection(const QString &response)
         "}"
     );
     selectButton->installEventFilter(this);
-    connect(selectButton, &QPushButton::clicked, this, &syllabusTest2::onCourseSelected);
+    connect(selectButton, &QPushButton::clicked, this, &SyllabusFetch::onCourseSelected);
     buttonLayout->addWidget(selectButton);
 
     // Add exit button second (on bottom) with red styling
@@ -375,7 +375,7 @@ void syllabusTest2::showCourseSelection(const QString &response)
     m_dlg.showDlg();
 }
 
-void syllabusTest2::onCourseSelected()
+void SyllabusFetch::onCourseSelected()
 {
     int index = m_listWidget->currentRow();
     if (index < 0 || index >= m_courses.size()) {
@@ -408,19 +408,19 @@ void syllabusTest2::onCourseSelected()
     fetchSyllabus(m_courses[index].url);
 }
 
-void syllabusTest2::fetchSyllabus(const QString &courseUrl)
+void SyllabusFetch::fetchSyllabus(const QString &courseUrl)
 {
     cleanupProcess();
     m_process = new QProcess(this);
     connect(m_process, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-            this, &syllabusTest2::onSyllabusFinished);
+            this, &SyllabusFetch::onSyllabusFinished);
 
     QStringList arguments;
     arguments << courseUrl;
     m_process->start(FETCH_SCRIPT, arguments);
 }
 
-void syllabusTest2::onSyllabusFinished(int exitCode, QProcess::ExitStatus exitStatus)
+void SyllabusFetch::onSyllabusFinished(int exitCode, QProcess::ExitStatus exitStatus)
 {
     QString response = m_process->readAllStandardOutput();
     QString error = m_process->readAllStandardError();
@@ -523,7 +523,7 @@ void syllabusTest2::onSyllabusFinished(int exitCode, QProcess::ExitStatus exitSt
     m_dlg.showDlg();
 }
 
-bool syllabusTest2::eventFilter(QObject *obj, QEvent *event)
+bool SyllabusFetch::eventFilter(QObject *obj, QEvent *event)
 {
     // Handle list widget touch events
     if (QListWidget *list = qobject_cast<QListWidget*>(obj)) {
@@ -603,7 +603,7 @@ bool syllabusTest2::eventFilter(QObject *obj, QEvent *event)
     return QObject::eventFilter(obj, event);
 }
 
-void syllabusTest2::clearLayout()
+void SyllabusFetch::clearLayout()
 {
     if (QLayout* layout = m_dlg.layout()) {
         QLayoutItem* item;
@@ -620,7 +620,7 @@ void syllabusTest2::clearLayout()
     m_listWidget = nullptr;
 }
 
-void syllabusTest2::cleanupProcess()
+void SyllabusFetch::cleanupProcess()
 {
     if (m_process) {
         m_process->disconnect();
@@ -633,7 +633,7 @@ void syllabusTest2::cleanupProcess()
     }
 }
 
-void syllabusTest2::showErrorMessage(const QString& message, bool isWarning)
+void SyllabusFetch::showErrorMessage(const QString& message, bool isWarning)
 {
     // Clear any existing content
     clearLayout();

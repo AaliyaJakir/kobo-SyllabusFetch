@@ -19,6 +19,8 @@ This Kobo plugin takes exported notebooks and generates recommendations for MIT 
 2. **Run endpoint to send books to Kobo using Calibre-kobo server**  
    Run `calibre_kobo_server.py` as your server and configure `{EPUB_DIR}` to point to your `calibre-web-automated` book ingestion folder.
 
+   ***Note: {TEMP_DIR} in calibre_kobo_server.py may give permission issues. you may need to use the full path***
+
 3. **Configure Server URL**  
    Add your server URL to `/mnt/onboard/.adds/pkm/.env`:
    ```bash
