@@ -17,9 +17,16 @@ This Kobo plugin takes exported notebooks and generates recommendations for MIT 
    - `ocw_fetch.sh`: Fetches syllabus content and sends it to Kobo as an EPUB.
 
 2. **Run endpoint to send books to Kobo using Calibre-kobo server**  
-   Execute `calibre_kobo_server.py` on your server and configure `{EPUB_DIR}` to point to your `calibre-web-automated` book ingestion folder.
+   Run `calibre_kobo_server.py` as your server and configure `{EPUB_DIR}` to point to your `calibre-web-automated` book ingestion folder.
 
-3. **Update Kobo**  
+3. **Configure Server URL**  
+   Add your server URL to `/mnt/onboard/.adds/pkm/.env`:
+   ```bash
+   SERVER_URL=http://your-server-address:port
+   ```
+   This should point to where your `calibre_kobo_server.py` is running.
+
+4. **Update Kobo**  
    Place `KoboRoot.tgz` in your Kobo’s `.kobo` folder. This will update your Kobo.
 
 ---

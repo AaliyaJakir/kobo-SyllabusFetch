@@ -58,8 +58,8 @@ class TemplatePlugin : public QObject, public NPGuiInterface
         QList<CourseInfo> m_courses;
         QString m_selectedNotebook;
         const QString NOTEBOOKS_PATH = "/mnt/onboard/Exported Notebooks";
-        const QString SEARCH_SCRIPT = "/mnt/onboard/ocw_search.sh";
-        const QString FETCH_SCRIPT = "/mnt/onboard/ocw_fetch.sh";
+        const QString SEARCH_SCRIPT = "/mnt/onboard/.adds/syllabusFetch/ocw_search.sh";
+        const QString FETCH_SCRIPT = "/mnt/onboard/.adds/syllabusFetch/ocw_fetch.sh";
 };
 
 #endif // TEMPLATE_PLUGIN_H

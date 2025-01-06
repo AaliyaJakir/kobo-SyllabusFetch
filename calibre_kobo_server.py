@@ -30,7 +30,7 @@ index.add(embeddings)
 
 # Add these constants at the top with other imports
 EPUB_DIR = "../cwa-book-ingest"
-TEMP_DIR = "/tmp/mitocw"
+TEMP_DIR = "/tmp/mitocw" # Make sure you have permission and this is writable
 CALIBRE_LIBRARY_PATH = os.path.expanduser("~/Documents/Kobo/calibre-library")
 
 def get_page_content(url):
