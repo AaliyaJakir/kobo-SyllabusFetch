@@ -3,7 +3,15 @@
 # Path to binaries on Kobo
 CURL_BIN="/mnt/onboard/.niluje/usbnet/bin/curl"
 JQ_BIN="/mnt/onboard/.niluje/usbnet/bin/jq"
-SERVER="http://192.168.12.213:5000"
+CONFIG_FILE="/mnt/onboard/.adds/pkm/config.txt"
+
+# Source environment file
+if [ -f "$CONFIG_FILE" ]; then
+    . "$CONFIG_FILE"
+else
+    echo "Error: Config file not found at $CONFIG_FILE" >&2
+    exit 1
+fi
 
 # Check if URL is provided
 if [ -z "$1" ]; then
@@ -25,7 +33,7 @@ json_data=$($JQ_BIN -n --arg url "$1" \
 response=$($CURL_BIN -s -X POST \
     -H "Content-Type: application/json" \
     -d "$json_data" \
-    "$SERVER/fetch-content")
+    "$SERVER_URL/fetch-content")
 
 # Output the response for the QT plugin to parse
 echo "$response" 

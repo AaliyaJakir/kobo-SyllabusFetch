@@ -12,12 +12,12 @@ This Kobo plugin takes exported notebooks and generates recommendations for MIT 
 ## Installation
 
 1. **Add Scripts to Kobo**  
-   Place these scripts in `/mnt/onboard/`:
+   Place these scripts in `/mnt/onboard/.adds/syllabusFetch/`:
    - `ocw_search.sh`: Searches courses using vector embedding similarity.
    - `ocw_fetch.sh`: Fetches syllabus content and sends it to Kobo as an EPUB.
 
-2. **Run the Search Service**  
-   Execute `search_service.py` on your server and configure `{EPUB_DIR}` to point to your `calibre-web-automated` book ingestion folder.
+2. **Run endpoint to send books to Kobo using Calibre-kobo server**  
+   Execute `calibre_kobo_server.py` on your server and configure `{EPUB_DIR}` to point to your `calibre-web-automated` book ingestion folder.
 
 3. **Update Kobo**  
    Place `KoboRoot.tgz` in your Kobo’s `.kobo` folder. This will update your Kobo.

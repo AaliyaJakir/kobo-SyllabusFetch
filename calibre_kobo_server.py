@@ -31,6 +31,7 @@ index.add(embeddings)
 # Add these constants at the top with other imports
 EPUB_DIR = "../cwa-book-ingest"
 TEMP_DIR = "/tmp/mitocw"
+CALIBRE_LIBRARY_PATH = os.path.expanduser("~/Documents/Kobo/calibre-library")
 
 def get_page_content(url):
     try:
@@ -405,7 +406,6 @@ def get_available_resources(base_url):
         download_url = f"{base_url.rstrip('/')}/download/"
         response = requests.get(download_url)
         if response.status_code == 200:
-            soup = BeautifulSoup(response.text, 'html.parser')
             
             # Common resource types to look for
             resource_types = ["Lecture Videos", "Assignments", "Exams", "Lecture Notes"]
@@ -433,6 +433,36 @@ def get_available_resources(base_url):
     except Exception as e:
         print(f"Error getting resources: {str(e)}")
         return []
+
+@app.route('/books', methods=['GET'])
+def get_book_titles():
+    try:
+        book_titles = []
+        excluded_dirs = {'backup', 'resources', 'retired', 'metadata.db'}
+        
+        # Walk through the Calibre library directory
+        for item in os.listdir(CALIBRE_LIBRARY_PATH):
+            # Skip excluded directories and non-directories
+            if item in excluded_dirs or not os.path.isdir(os.path.join(CALIBRE_LIBRARY_PATH, item)):
+                continue
+                
+            author_path = os.path.join(CALIBRE_LIBRARY_PATH, item)
+            
+            # Get book titles from directory names
+            for book_dir in os.listdir(author_path):
+                book_path = os.path.join(author_path, book_dir)
+                if os.path.isdir(book_path):
+                    book_titles.append(book_dir)
+        
+        return jsonify({
+            "books": book_titles
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
