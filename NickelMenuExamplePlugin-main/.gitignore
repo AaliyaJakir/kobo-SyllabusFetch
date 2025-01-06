@@ -8,6 +8,5 @@
 .cache/
 compile_commands.json
 /res/nmexampleplugin_version
-/KoboRoot.tgz
 /libnmexampleplugin.so
 /src/nmexampleplugin.o
