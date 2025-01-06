@@ -16,9 +16,9 @@ OBJCOPY       = $(CROSS_COMPILE)objcopy
 OBJDUMP       = $(CROSS_COMPILE)objdump
 STRINGS       = $(CROSS_COMPILE)strings
 
-override LIBRARY  := syllabusfetch.so
-override SOURCES  := SyllabusFetch.cc NPDialog.cc
-override MOCS     := SyllabusFetch.h NPDialog.h
+override LIBRARY  := syllabustest2.so
+override SOURCES  := syllabusTest2.cc NPDialog.cc
+override MOCS     := syllabusTest2.h NPDialog.h
 override CXXFLAGS += -fPIC
 
 override OBJECTS_CXX  := $(filter %.o,$(SOURCES:%.cc=%.o))

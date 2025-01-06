@@ -1,5 +1,5 @@
-#ifndef SYLLABUSFETCH_PLUGIN_H
-#define SYLLABUSFETCH_PLUGIN_H
+#ifndef SYLLABUSTEST2_PLUGIN_H
+#define SYLLABUSTEST2_PLUGIN_H
 
 #include <QObject>
 #include <QDialog>
@@ -24,15 +24,15 @@ struct CourseInfo {
     double score;
 };
 
-class SyllabusFetch : public QObject, public NPGuiInterface
+class syllabusTest2 : public QObject, public NPGuiInterface
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID NPGuiInterfaceIID FILE "SyllabusFetch.json")
+    Q_PLUGIN_METADATA(IID NPGuiInterfaceIID FILE "syllabusTest2.json")
     Q_INTERFACES(NPGuiInterface)
 
     public:
-        SyllabusFetch();
-        ~SyllabusFetch();
+        syllabusTest2();
+        ~syllabusTest2();
         void showUi();
 
     protected:
@@ -58,8 +58,8 @@ class SyllabusFetch : public QObject, public NPGuiInterface
         QList<CourseInfo> m_courses;
         QString m_selectedNotebook;
         const QString NOTEBOOKS_PATH = "/mnt/onboard/Exported Notebooks";
-        const QString SEARCH_SCRIPT = "/mnt/onboard/ocw_search.sh";
-        const QString FETCH_SCRIPT = "/mnt/onboard/ocw_fetch.sh";
+        const QString SEARCH_SCRIPT = "/mnt/onboard/.adds/syllabusFetch/ocw_search.sh";
+        const QString FETCH_SCRIPT = "/mnt/onboard/.adds/syllabusFetch/ocw_fetch.sh";
 };
 
-#endif // SYLLABUSFETCH_PLUGIN_H
+#endif // SYLLABUSTEST2_PLUGIN_H
